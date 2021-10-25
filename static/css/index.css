@@ -1,0 +1,210 @@
+*{
+    margin:0;
+    margin:0;
+    box-sizing: border-box; 
+}
+
+body{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    background-color: #eee;
+}
+
+/* diseño de cabecera */
+.cabecera{
+    margin-top:70;
+    background-color: #fd7f06;
+    width: 100%;
+    height: 70px;
+    border-bottom: 2px solid white;    
+    color: #eee;
+    position:fixed ;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+}
+
+h1{
+    float: left;
+    display: inline;
+    margin-top: 18px;
+    margin-left: 30px;
+    cursor: pointer;
+    
+}
+.buscar{
+
+    margin-top: 20px;
+    width: 30%;
+    margin-left: 120px;
+    background-color: #f9f9f9;
+    padding: 5px;
+    border-radius: 5px;
+    border:2px solid black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    color:black;
+
+}
+
+.icon-search{
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.icon-login{
+    font-size: 23px;
+    cursor: pointer;
+    margin-left: 30px;
+    text-decoration: none;
+    color: #eee;
+}
+
+.icon-checkin{
+    font-size: 23px;
+    cursor: pointer;
+    margin-left: 30px;
+    text-decoration: none;
+    color: #eee;
+}
+
+.icon-menu {
+font-size: 23px;
+cursor: pointer;
+margin-left: 40px;
+text-decoration: none;
+color: #eee;
+}
+
+
+
+
+
+
+/* diseño del banner */
+
+.banner{
+    margin-top: 70px;
+    
+   
+    
+}
+.banner img{
+    width: 100%;
+    height: 350px;
+    }
+    
+
+
+.banner h2{
+position: absolute;
+top: 80px;
+left: 73px;    
+}
+
+/* diseño de contenido */
+
+.page-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+}
+
+.product-container{
+    transition: box-shadow 0.3s ease;
+    background-color:#fff;
+    padding: 5px;
+    margin: 15px;
+    position: relative;
+    cursor:pointer;
+}
+
+.product-container:hover{
+    box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.5);
+}
+
+.product-container img{
+    width: 300px;
+    height: 200px;
+}
+
+.icon-buy{
+    transition: color 0.4s ease;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 5px ;
+    background-color:white ;
+    color:black;
+    border: 1.5px solid black;
+    
+}
+.icon-buy:hover{
+    background-color:#44aa44    ;
+    color: white;
+    cursor:pointer;
+}
+.icon-list{
+    transition: color 0.4s ease;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 5px ;
+    background-color:white ;
+    color:black;
+    border: 1.5px solid black;
+}
+
+.icon-list:hover{
+    background-color:#44aa44    ;
+    color: white;
+    cursor:pointer;
+}
+
+footer{
+    width: 100%;
+    height: 100px;
+    background-color: #f29417;
+}
+
+.contacto{
+    
+    font-size: 25px;
+    margin-left: 90%;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.contacto:hover{
+color: white;
+}
+
+.icon{
+    margin-top: -25px;
+    font-size: 35px;
+    margin-left: 45%;
+}
+
+.icon-facebook:hover{
+color: white;
+cursor: pointer;
+}
+.icon-twitter:hover{
+color: white;
+cursor: pointer;
+}
+.icon-instagram:hover{
+color: white;
+cursor: pointer;
+}
+
+.copy{
+    margin-left: 10px;
+    font-size: 20px;
+}

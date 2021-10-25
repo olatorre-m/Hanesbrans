@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' type='text/css' href='../static/css/adminuser.css' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Admin User</title>
+</head>
+<body>
+    <form class="form-v" action="/adminuser/" method="POST">
+        <h4>Administración de usuarios</h4>
+       
+        {%with messages=get_flashed_messages() %}
+        {%if messages%}
+        {% for message in messages %}
+        <h2>{{message}}</h2> 
+        {% endfor %}
+        {% endif %}
+        {% endwith %} 
+                    
+        <table>
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Email</td>
+                    <td>Contraseña</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}       
+                <tr>
+                    <td>{{user.1}}</td>
+                    <td>{{user.2}}</td>
+                    <td>{{user.3}}</td>
+                    <td>{{user.4}}</td>
+                    <td>
+                        
+                        <a href="/deleteuser/{{user.0}}">Eliminar</a>
+                    </td>
+                </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </form>
+</body>
+</html>

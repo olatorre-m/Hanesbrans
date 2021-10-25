@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/registro.css" type="text/css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    <form class="form-register" action="/register/" method="POST">
+        <h4>Formulario de Registro</h4>   
+        <input class="controls" type="text" name="name" id="nombres" placeholder="Ingrese su nombre">
+        <input class="controls" type="text" name="lastname" id="apellidos" placeholder="Ingrese su apellido">
+        <input class="controls" type="email" name="email" id="correo" placeholder="Ingrese su correo electronico"><br>
+        <input class="controls"type="password" name="pass" id="contraseña" placeholder="Cree su contraseña">
+        <label class="terminos"><input class="box" type="checkbox" id="cbox1" value="first_checkbox"> Estoy de acuerdo con <a href="#"><strong>Terminos y Condiciones</strong> </a></label>
+        <button class="boton"  type="submit">Crear cuenta</button>
+        <p class="cuenta"><a href="/login/">¿Ya tengo cuenta?</a></p> 
+         
+
+    </form>
+
+
+</body>
+</html>

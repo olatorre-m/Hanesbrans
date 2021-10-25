@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/index.css" type="text/css"/>
+    <link rel="stylesheet" href="../static/css/fontello.css" type="text/css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <div class="cabecera">
+        <div class="contenido">
+            <h1 class="icon-globe">HANESBRANDS</h1>
+            <input class="buscar"  type="search" name="buscar" id="buscar" placeholder="¿Qué quieres buscar?">
+            <i class="icon-search" for="buscar"></i>
+            <a class="icon-login" href="/login/">Mi cuenta</a> 
+            <a class="icon-checkin" href="/register/">Registrarme</a>  
+            <a class="icon-menu" href="/admin/"></a>  
+            
+        </div>
+    </div>
+    <div class="banner">
+        <img src="../static/img/logo.png">
+        <div><h2>Del campo a la mesa de tu casa</h2></div>
+        
+
+    </div>
+    
+<div class="page-content">
+    {% for product in products %}
+    <div class="product-container">
+        <img src="../static/img/aguacates.jpg">
+        <h3>{{ product.1}}</h3>
+        <h4>Cantidad: 1 Kg </h4>
+        <h4>Valor: {{ product.2}} </h4>
+        <button class="icon-buy">Comparar</button>
+        <button class="icon-list">Agregar</button>        
+    </div>
+    {% endfor %}
+</div>
+    
+
+
+        
+
+
+
+
+
+
+
+        
+    
+
+    <footer>
+        <div class="contacto">
+            <h5>Contacto</h5>
+        </div>
+        <div class="icon">
+            <span class="icon-facebook"></span>
+            <span class="icon-twitter"></span>
+            <span class="icon-instagram"></span>         
+        </div>
+        <div class="copy">
+            <h5 >Copyright 2021</h5>
+        </div>
+
+
+
+
+    </footer>
+
+
+
+</body>
+</html>
