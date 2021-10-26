@@ -45,20 +45,35 @@ def Login():
 
 @app.route('/register/',  methods=['GET','POST'])
 def Register():
+    
     if request.method == 'POST':
-        name=request.form['name']
-        lastname=request.form['lastname']
-        email=request.form['email']
+        name=escape(request.form['name'])
+        lastname=escape(request.form['lastname'])
+        email=escape(request.form['email'])
 
-        encoder=str(request.form['pass']).encode()
-        pasword=hashlib.sha256(encoder).hexdigest()
+        swerror=False
+        if name==None or len(name)==0:
+            flash('ERROR: Debe suministrar un nombre')
+            swerror = True
+        if lastname==None or len(lastname)==0:
+            flash('ERROR: Debe suministrar un apellido')
+            swerror = True
+        if email==None or len(email)==0:
+            flash('ERROR: Debe suministrar un email')
+            swerror = True
+        if not swerror :
+            
+            encoder=str(escape(request.form['pass'])).encode()
+            pasword=hashlib.sha256(encoder).hexdigest()
+            
+            cur=db.cursor()
+            cur.execute('INSERT INTO client (name, lastname, email, pass) VALUES (%s, %s, %s, %s)',
+            (name,lastname,email,pasword))
 
+            db.commit()
 
-        cur=db.cursor()
-        cur.execute('INSERT INTO client (name, lastname, email, pass) VALUES (%s, %s, %s, %s)',
-        (name,lastname,email,pasword))
-
-        db.commit()
+        else:
+            flash('INFO: Los datos no fueron almacenados')
 
     return render_template ('registro.html')
     
@@ -78,10 +93,10 @@ def Admin_product():
 @app.route('/addproduct/', methods=['GET', 'POST'])
 def Add_product():
     if  request.method == 'POST':
-        name= request.form['name']
-        price= request.form['price']
-        existence= request.form['existence']
-        description= request.form['description']
+        name= escape(request.form['name'])
+        price= escape(request.form['price'])
+        existence= escape(request.form['existence'])
+        description= escape(request.form['description'])
 
         cur = db.cursor()
         cur.execute('INSERT INTO product (name, price, existence, description) VALUES(%s, %s, %s,%s)',
@@ -104,10 +119,10 @@ def get_product(id):
 @app.route('/update/<id>', methods=['POST'])
 def update_product(id):
     if request.method=='POST':
-            name= request.form['name']
-            price= request.form['price']
-            existence= request.form['existence']
-            description= request.form['description']   
+            name= escape(request.form['name'])
+            price= escape(request.form['price'])
+            existence= escape(request.form['existence'])
+            description= escape(request.form['description'])   
             cur = db.cursor()
             cur.execute("""
             UPDATE product
