@@ -26,6 +26,16 @@ def Index():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def Login():
+    email=request.form['email']
+    encoder=str(request.form['pass']).encode()
+    formpasword=hashlib.sha256(encoder).hexdigest()
+    cur=db.cursor()
+    temp=cur.execute('SELECT FROM CLIENT (email) VALUES (%s)', email)
+    print(temp)
+
+    if formpasword==password:
+        pass
+
     return render_template ('login.html')
 
 @app.route('/register/',  methods=['GET','POST'])
@@ -34,8 +44,9 @@ def Register():
         name=request.form['name']
         lastname=request.form['lastname']
         email=request.form['email']
+
         encoder=str(request.form['pass']).encode()
-        pasword=hashlib.sha256(encoder)
+        pasword=hashlib.sha256(encoder).hexdigest()
 
 
         cur=db.cursor()
