@@ -1,12 +1,10 @@
 from flask import Flask, render_template,request, redirect,url_for,flash
 from flask.wrappers import Request
 from flask_mysqldb import MySQL
+from markupsafe import escape 
 import mysql.connector
 import hashlib
-
-
-
-
+from db import seleccion, accion
 
 app=Flask(__name__)
 
@@ -30,23 +28,54 @@ def Index():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def Login():
+
+    '''
+    email=request.form['email']
+    encoder=str(request.form['pass']).encode()
+    formpasword=hashlib.sha256(encoder).hexdigest()
+    cur=db.cursor()
+    temp=cur.execute('SELECT FROM CLIENT (email) VALUES (%s)', email)
+    print(temp)
+
+    if formpasword==password:
+        pass
+        '''
+
     return render_template ('login.html')
 
 @app.route('/register/',  methods=['GET','POST'])
 
 
 def Register():
+    
     if request.method == 'POST':
-        name=request.form['name']
-        lastname=request.form['lastname']
-        email=request.form['email']
-        pasword=request.form['pass']
+        name=escape(request.form['name'])
+        lastname=escape(request.form['lastname'])
+        email=escape(request.form['email'])
 
-        cur=db.cursor()
-        cur.execute('INSERT INTO client (name, lastname, email, pass) VALUES (%s, %s, %s, %s)',
-        (name,lastname,email,pasword))
+        swerror=False
+        if name==None or len(name)==0:
+            flash('ERROR: Debe suministrar un nombre')
+            swerror = True
+        if lastname==None or len(lastname)==0:
+            flash('ERROR: Debe suministrar un apellido')
+            swerror = True
+        if email==None or len(email)==0:
+            flash('ERROR: Debe suministrar un email')
+            swerror = True
+        if not swerror :
+            
+            encoder=str(escape(request.form['pass'])).encode()
+            pasword=hashlib.sha256(encoder).hexdigest()
+            
+            cur=db.cursor()
+            cur.execute('INSERT INTO client (name, lastname, email, pass) VALUES (%s, %s, %s, %s)',
+            (name,lastname,email,pasword))
 
-        db.commit()
+            db.commit()
+
+        else:
+            flash('INFO: Los datos no fueron almacenados')
 
     return render_template ('registro.html')
     
@@ -66,10 +95,10 @@ def Admin_product():
 @app.route('/addproduct/', methods=['GET', 'POST'])
 def Add_product():
     if  request.method == 'POST':
-        name= request.form['name']
-        price= request.form['price']
-        existence= request.form['existence']
-        description= request.form['description']
+        name= escape(request.form['name'])
+        price= escape(request.form['price'])
+        existence= escape(request.form['existence'])
+        description= escape(request.form['description'])
 
         cur = db.cursor()
         cur.execute('INSERT INTO product (name, price, existence, description) VALUES(%s, %s, %s,%s)',
@@ -92,10 +121,10 @@ def get_product(id):
 @app.route('/update/<id>', methods=['POST'])
 def update_product(id):
     if request.method=='POST':
-            name= request.form['name']
-            price= request.form['price']
-            existence= request.form['existence']
-            description= request.form['description']   
+            name= escape(request.form['name'])
+            price= escape(request.form['price'])
+            existence= escape(request.form['existence'])
+            description= escape(request.form['description'])   
             cur = db.cursor()
             cur.execute("""
             UPDATE product
@@ -135,12 +164,6 @@ def delete_user(id):
     db.commit()
     flash('Usuario eliminado correctamente')
     return redirect(url_for('Admin_user'))
-
-
-
-
-
-
 
 
 if __name__=='__main__':
