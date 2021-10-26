@@ -2,6 +2,11 @@ from flask import Flask, render_template,request, redirect,url_for,flash
 from flask.wrappers import Request
 from flask_mysqldb import MySQL
 import mysql.connector
+import hashlib
+
+
+
+
 
 app=Flask(__name__)
 
@@ -28,6 +33,8 @@ def Login():
     return render_template ('login.html')
 
 @app.route('/register/',  methods=['GET','POST'])
+
+
 def Register():
     if request.method == 'POST':
         name=request.form['name']

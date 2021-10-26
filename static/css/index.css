@@ -119,6 +119,8 @@ left: 73px;
     margin: 15px;
     position: relative;
     cursor:pointer;
+    height: 310px;
+   
 }
 
 .product-container:hover{
@@ -149,6 +151,7 @@ left: 73px;
     cursor:pointer;
 }
 .icon-list{
+    
     transition: color 0.4s ease;
     text-decoration: none;
     margin-top: 10px;
@@ -207,4 +210,9 @@ cursor: pointer;
 .copy{
     margin-left: 10px;
     font-size: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }

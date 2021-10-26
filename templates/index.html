@@ -27,16 +27,19 @@
 
     </div>
     
+    
 <div class="page-content">
     {% for product in products %}
-    <div class="product-container">
-        <img src="../static/img/aguacates.jpg">
-        <h3>{{ product.1}}</h3>
-        <h4>Cantidad: 1 Kg </h4>
-        <h4>Valor: {{ product.2}} </h4>
-        <button class="icon-buy">Comparar</button>
-        <button class="icon-list">Agregar</button>        
-    </div>
+    <a href="/login/">
+        <div class="product-container">
+            <img src="../static/img/aguacates.jpg">
+            <h4>{{ product.1}}</h4>
+            <h4>Cantidad: 1 Kg </h4>
+            <h4>Valor: {{ product.2}} </h4><br>
+            <a class="icon-buy" href="/register/">Comprar</a>
+            <a class="icon-list" href="/addproduct">Agregar</a>        
+        </div>
+    </a>
     {% endfor %}
 </div>
     
