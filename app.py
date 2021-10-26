@@ -1,8 +1,10 @@
 from flask import Flask, render_template,request, redirect,url_for,flash
 from flask.wrappers import Request
 from flask_mysqldb import MySQL
+from markupsafe import escape 
 import mysql.connector
 import hashlib
+from db import seleccion, accion
 
 app=Flask(__name__)
 
@@ -26,6 +28,8 @@ def Index():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def Login():
+
+    '''
     email=request.form['email']
     encoder=str(request.form['pass']).encode()
     formpasword=hashlib.sha256(encoder).hexdigest()
@@ -35,6 +39,7 @@ def Login():
 
     if formpasword==password:
         pass
+        '''
 
     return render_template ('login.html')
 
