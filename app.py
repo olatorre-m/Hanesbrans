@@ -2,6 +2,7 @@ from flask import Flask, render_template,request, redirect,url_for,flash
 from flask.wrappers import Request
 from flask_mysqldb import MySQL
 import mysql.connector
+import hashlib
 
 app=Flask(__name__)
 
@@ -33,7 +34,9 @@ def Register():
         name=request.form['name']
         lastname=request.form['lastname']
         email=request.form['email']
-        pasword=request.form['pass']
+        encoder=str(request.form['pass']).encode()
+        pasword=hashlib.sha256(encoder)
+
 
         cur=db.cursor()
         cur.execute('INSERT INTO client (name, lastname, email, pass) VALUES (%s, %s, %s, %s)',
@@ -128,12 +131,6 @@ def delete_user(id):
     db.commit()
     flash('Usuario eliminado correctamente')
     return redirect(url_for('Admin_user'))
-
-
-
-#### no sé que poner
-
-
 
 
 if __name__=='__main__':
