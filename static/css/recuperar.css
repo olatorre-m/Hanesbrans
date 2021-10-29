@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #eee;
+}
+
+.restore{
+    width: 420px;
+    background-color: #fd7f06;
+    padding: 30px 30px 20px 30px;
+    margin: auto;
+    margin-top: 120px;    
+    border-radius: 5px;
+    font-family: "calibri";
+    color: #eee;
+    box-shadow: 10px 10px 10px white;
+}
+.restore h4{
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.correo{
+    width: 390px;
+    background:white; 
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid black;
+    font-family: "calibri";
+    font-size: 18px;
+    color: black;
+}
+.boton{
+    width: 100%;
+    background-color: #44aa44;
+    border: none;
+    padding: 12px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton:hover{
+    box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.5);
+}
+
+.restore .btn-cerrar-popup {
+	position: relative;
+    left: 98%;
+    font-size: 16px;
+	line-height: 16px;	
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+.restore .btn-cerrar-popup:hover {
+	color: #000;
+}
+h2{
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: black;
+}

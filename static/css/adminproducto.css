@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.form-v .btn-cerrar-popup {
+	position: relative;
+    left: 98%;
+    font-size: 16px;
+	line-height: 16px;	
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+
+.form-v .btn-cerrar-popup:hover {
+	color: #000;
+}
+body{
+    background-color: #eee;
+}
+
+.form-v{
+    display: block;
+    width: 72%;
+    background-color: #fd7f06;
+    padding: 30px 30px 10px 30px;
+    margin: auto;
+    margin-top: 10px;    
+    border-radius: 5px;
+    font-family: "calibri";
+    color: #eee;
+    box-shadow: 10px 10px 10px white;
+}
+.form-v h4{
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.form-v h2{
+   
+    color: white;  
+    font-size: 22px;    
+    text-align: center;
+    color: black;
+    margin-bottom: 5px;
+
+
+}
+.form-v h3{
+    color: black;
+}
+.controls{
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-family: "calibri";
+    font-size: 18px;
+    color: black;
+    
+}
+
+
+.boton{
+
+background-color: #44aa44;
+width: 100px;
+border: none;
+padding: 8px;
+color: white;
+margin: 16px 0;
+font-size: 16px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.boton:hover{
+    box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.5);
+}
+
+table{
+    background-color: white;
+    color: black;
+    width: 100%;
+    border-radius: 5px;
+    border:1px solid black;
+}
+thead tr td{
+font-size: 20px;
+font-weight: bold;
+text-align: center;
+}
+
+tbody tr td{
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.uno{
+    background-color: #44aa44;
+    width: 100px;
+    border: none;
+    padding: 2px 5px 2px 5px;
+    color: white;    
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 10px;
+    transition: 0.5s;  
+    
+}
+
+.uno:hover{
+    box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.5);
+    background-color: rgb(7, 60, 82);
+    
+}
+tbody tr:hover{
+box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.5);
+
+}
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' type='text/css' href='../static/css/adminproducto.css' />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administracion de productos</title>
+</head>
+<body>
+    <form class="form-v" action="/addproduct/" method="POST">
+        <a href="/admin/" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a> 
+        <h4>Administración de productos</h4>
+        <h3>Agregar productos:</h3>
+        
+        
+        
+        <input class="controls" type="text" name="name" placeholder="Nombre " required/>
+        <input class="controls" type="number" name="price" placeholder="Precio" required/>
+        <input class="controls" type="number" name="existence" placeholder="Existencia" required/>
+        <input class="controls" type="text" name="description" placeholder="Descripción" required/>
+        <input type="file" name="ourfile">
+        
+        <button class="boton" type="submit">Agregar</button>
+
+        {%with messages=get_flashed_messages() %}
+        {%if messages%}
+        {% for message in messages %}
+        <h2>{{message}}</h2> 
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Precio ($)</td>
+                    <td>Existencias (c/u)</td>
+                    <td>Descripción</td>
+                    <td>Imagen</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}       
+                <tr>
+                    <td>{{product.1}}</td>
+                    <td>{{product.2}}</td>
+                    <td>{{product.3}}</td>
+                    <td>{{product.4}}</td>
+                    <td>{{product.5}}</td>
+                    <td>
+                        <a class="uno" href="/edit/{{product.0}}">Editar</a>
+                        <a class="uno" href="/delete/{{product.0}}">Eliminar</a>
+                    </td>
+                </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+
+    </form>
+</body>
+</html>
