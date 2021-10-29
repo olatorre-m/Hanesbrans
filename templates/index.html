@@ -18,9 +18,9 @@
             <i class="icon-search" for="buscar"></i>
 			{% if 'name' in session %}
 					{% if  'email' in session %} 
-						<i class="icon-login">{{session['name']}}</i>
-						<a href="/salir/" class="icon-salir">salir</a>
+						<i class="icon-login">{{session['name']}}</i>						
 						<a class="icon-menu" href="/admin/"></a>
+						<a href="/salir/" class="icon-salir">salir</a>
 						
 					{% else %}
 					<i class="icon-login">{{session['name']}}</i>

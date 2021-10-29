@@ -26,15 +26,15 @@ semilla=bcrypt.gensalt()
 
 @app.route('/')
 @app.route('/index/')
-def Index():
+def Index():    
     cur = db.cursor()
     cur.execute('SELECT * FROM product')
     data=cur.fetchall()
-   
+    return render_template('index.html', products=data)
     # return redirect(url_for('Index',products=data))
     
     
-    return render_template('index.html', products=data)
+    
    
 
 @app.route('/register/',  methods=['GET', 'POST'])
@@ -107,12 +107,16 @@ def Login():
             if (bcrypt.checkpw(password_encode,password_encriptado_encode)):
 
                     #registrar sesion
-                session['name']=usuario[0]
-
-                if email == 'deividj.54@gmail.com':
-                    session['email']=usuario[1]
                 
-                return redirect(url_for('Index'))
+
+                    if email == 'deividj.54@gmail.com':
+                        session['name']=usuario[0]
+                        session['email']=usuario[1]
+                
+                        return redirect(url_for('Index'))
+                    else:     
+                        session['name']=usuario[0]
+                        return redirect(url_for('Index'))
             else:
 
                 flash('La contraseña es incorrecta')
@@ -121,13 +125,6 @@ def Login():
 
             flash('El correo ingresado no existe')
      return render_template('login.html')
-
-
-
-
-
-    
-
 
 
 @app.route('/admin/', methods=['GET', 'POST'])
@@ -215,11 +212,7 @@ def delete_user(id):
     flash('Usuario eliminado correctamente')
     return redirect(url_for('Admin_user'))
 
-@app.route('/comentario/',methods=['GET', 'POST'])
-def Comentario():
-     
-    
- return render_template('descripcion.html')
+
 
 
 @app.route('/salir/')
