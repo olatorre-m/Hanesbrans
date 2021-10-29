@@ -3,7 +3,7 @@ from flask import Flask, render_template,request, redirect, session, sessions,ur
 from flask.templating import render_template_string
 from flask.wrappers import Request
 from flask_mysqldb import MySQL
-from markupsafe import escape 
+from markupsafe import escape
 import mysql.connector
 import hashlib
 import bcrypt
@@ -16,30 +16,28 @@ app=Flask(__name__)
 app.secret_key="mysecretkey"
 
 db = mysql.connector.connect(
-   host="localhost",
-   user="root",
+   host="olatorrem.mysql.pythonanywhere-services.com",
+   user="olatorrem",
    passwd="crakwz503",
-   database='hanes'
+   database='olatorrem$default'
 )
 mysql=MySQL(app)
 semilla=bcrypt.gensalt()
 
 @app.route('/')
-@app.route('/index/')
+@app.route('/index')
 def Index():
     cur = db.cursor()
     cur.execute('SELECT * FROM product')
     data=cur.fetchall()
-   
-    # return redirect(url_for('Index',products=data))
-    
-    
     return render_template('index.html', products=data)
-   
+    # return redirect(url_for('Index',products=data))
+
+
 
 @app.route('/register/',  methods=['GET', 'POST'])
 def Register():
-    
+
         if request.method == 'POST':
             name=request.form['name']
             lastname=request.form['lastname']
@@ -58,7 +56,7 @@ def Register():
                 flash('ERROR: Debe suministrar un email')
                 swerror = True
             if not swerror :
-                            
+
                 cur=db.cursor()
                 cur.execute('INSERT INTO client (name, lastname, email, pass) VALUES (%s, %s, %s, %s)',
                 (name,lastname,email,password_encriptado))
@@ -67,49 +65,43 @@ def Register():
                 #registrar sesion
                 session['name']=name
                 session['email']=email
-                
-                return redirect(url_for('Login'))
-                
 
-        else:
-            flash('Registro exitoso !!!')
+                return redirect(url_for('Login'))
+
+
+            else:
+                flash('INFO: Los datos no fueron almacenados')
 
         return render_template('registro.html')
-    
+
 @app.route('/login/', methods=['GET', 'POST'])
 def Login():
-     if request.method == 'POST':
-        
-    #     if 'name' in session:
-    #         return render_template ('admin.html')
-    #     else:
-    #         return render_template ('login.html')
-    # else:           
-        email=request.form['email']
+    if request.method == 'GET':
+        if 'nombre' in session:
+            return render_template ('index.thml')
+        else:
+            return render_template ('login.html')
+    else:
+        email=request.form.get['email']
         password=request.form['password']
         password_encode=password.encode("utf-8")
-            
-        cur=db.cursor()
-        # cur.execute('SELECT name, email, pass FROM client WHERE email = %s',
-        # (email))
-        sQuery="SELECT name, email, pass FROM client WHERE email = %s"
-        cur.execute(sQuery,[email])
 
-        usuario=cur.fetchone()
-        cur.close
+        cur=db.cursor()
+        cur.execute('SELECT name, email, pass FROM client WHERE email = %s',
+        (email))
+
+        usuario=cur.fetchall()
 
         if usuario !=None:
-            password_encriptado_encode=usuario[2].encode()
+            password_encriptado_encode=usuario[4].encode()
 
-                #verificar password 
+                #verificar password
             if (bcrypt.checkpw(password_encode,password_encriptado_encode)):
 
                     #registrar sesion
-                session['name']=usuario[0]
+                session['name']=usuario[1]
+                session['email']=email
 
-                if email == 'deividj.54@gmail.com':
-                    session['email']=usuario[1]
-                
                 return redirect(url_for('Index'))
             else:
 
@@ -117,14 +109,14 @@ def Login():
                 return render_template ('login.html')
         else:
 
-            flash('El correo ingresado no existe')
-     return render_template('login.html')
+            flash('El correo no existe')
+            return render_template('login.html')
 
 
 
 
 
-    
+
 
 
 
@@ -172,7 +164,7 @@ def update_product(id):
             name= escape(request.form['name'])
             price= escape(request.form['price'])
             existence= escape(request.form['existence'])
-            description= escape(request.form['description'])   
+            description= escape(request.form['description'])
             cur = db.cursor()
             cur.execute("""
             UPDATE product
@@ -215,30 +207,6 @@ def delete_user(id):
 
 @app.route('/comentario/',methods=['GET', 'POST'])
 def Comentario():
-     
-    
+
+
  return render_template('descripcion.html')
-
-
-@app.route('/salir/')
-def Salir():
-
-    session.clear()
-    return redirect(url_for('Index'))
-
-@app.route('/recuperar/', methods=['GET', 'POST'] )
-def Recuperar():
-    if request.method=='POST':
-        email=request.form['email']
-        emailcon=request.form['emailcon']
-
-        if email==emailcon:
-            flash('Se envio un enlace a tu correo:')
-            return redirect(url_for('Login'))
-        else:
-            flash('No hay coincidencia en los correos')
-    
-    return render_template('recuperar.html')
-
-if __name__=='__main__':
-    app.run(port=5000,debug=True)
