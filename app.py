@@ -25,15 +25,17 @@ mysql=MySQL(app)
 semilla=bcrypt.gensalt()
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index/')
 def Index():
     cur = db.cursor()
     cur.execute('SELECT * FROM product')
     data=cur.fetchall()
-    return render_template('index.html', products=data)
+   
     # return redirect(url_for('Index',products=data))
-
-
+    
+    
+    return render_template('index.html', products=data)
+   
 
 @app.route('/register/',  methods=['GET', 'POST'])
 def Register():
@@ -72,38 +74,44 @@ def Register():
             
 
         else:
-            flash('INFO: Los datos no fueron almacenados')
+            flash('Registro exitoso !!!')
 
         return render_template('registro.html')
     
 @app.route('/login/', methods=['GET', 'POST'])
 def Login():
-    if request.method == 'GET':
-        if 'nombre' in session:
-            return render_template ('index.thml')
-        else:
-            return render_template ('login.html')
-    else:           
-        email=request.form.get['email']
+     if request.method == 'POST':
+        
+    #     if 'name' in session:
+    #         return render_template ('admin.html')
+    #     else:
+    #         return render_template ('login.html')
+    # else:           
+        email=request.form['email']
         password=request.form['password']
         password_encode=password.encode("utf-8")
             
         cur=db.cursor()
-        cur.execute('SELECT name, email, pass FROM client WHERE email = %s',
-        (email))
+        # cur.execute('SELECT name, email, pass FROM client WHERE email = %s',
+        # (email))
+        sQuery="SELECT name, email, pass FROM client WHERE email = %s"
+        cur.execute(sQuery,[email])
 
-        usuario=cur.fetchall()
+        usuario=cur.fetchone()
+        cur.close
 
         if usuario !=None:
-            password_encriptado_encode=usuario[4].encode()
+            password_encriptado_encode=usuario[2].encode()
 
                 #verificar password 
             if (bcrypt.checkpw(password_encode,password_encriptado_encode)):
 
                     #registrar sesion
-                session['name']=usuario[1]
-                session['email']=email
+                session['name']=usuario[0]
 
+                if email == 'deividj.54@gmail.com':
+                    session['email']=usuario[1]
+                
                 return redirect(url_for('Index'))
             else:
 
@@ -111,8 +119,8 @@ def Login():
                 return render_template ('login.html')
         else:
 
-            flash('El correo no existe')
-            return render_template('login.html')
+            flash('El correo ingresado no existe')
+     return render_template('login.html')
 
 
 
@@ -214,9 +222,11 @@ def Comentario():
  return render_template('descripcion.html')
 
 
+@app.route('/salir/')
+def Salir():
 
-
-
+    session.clear()
+    return redirect(url_for('Index'))
 
 if __name__=='__main__':
     app.run(port=5000,debug=True)

@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 	<link rel="stylesheet" href="../static/css/fontello.css" type="text/css"/>
 	<link rel="stylesheet" href="../static/css/index.css">
-	<title>Ventana Emergente Animada</title>
+	<title>HANESBRANDS</title>
 </head>
 <body>
 	<div class="cabecera">
@@ -16,10 +16,22 @@
             <h1 class="icon-globe">HANESBRANDS</h1>
             <input class="buscar"  type="search" name="buscar" id="buscar" placeholder="¿Qué quieres buscar?">
             <i class="icon-search" for="buscar"></i>
+			{% if 'name' in session %}
+					{% if  'email' in session %} 
+						<i class="icon-login">{{session['name']}}</i>
+						<a href="/salir/" class="icon-salir">salir</a>
+						<a class="icon-menu" href="/admin/"></a>
+						
+					{% else %}
+					<i class="icon-login">{{session['name']}}</i>
+					<a  class="icon-salir" href="/salir/">salir</a>				
+					{% endif %}
+
+			{% else %}
             <a class="icon-login" href="/login/">Mi cuenta</a> 
             <a class="icon-checkin" href="/register/">Registrarme</a>  
-            <a class="icon-menu" href="/admin/"></a>  
-            
+              
+			{% endif%}	
         </div>
     </div>
 	<div class="banner">

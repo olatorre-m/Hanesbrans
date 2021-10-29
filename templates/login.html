@@ -9,18 +9,20 @@
 </head>
 <body>
 
-  {%with messages=get_flashed_messages() %}
-  {%if messages%}
-  {% for message in messages %}
-  <h2>{{message}}</h2> 
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
+  
     
-  <form name='flogin' id='flogin' action='/login/' method='GET'>
+  <form name='flogin' id='flogin' action='/login/' method='POST'>
     <div class="login">
-        <h4>Mi cuenta</h4>
-        <input class="usuario" type="email" name="email" id="correo" placeholder="Ingrese su usuario"><br>
+      <h4>Mi cuenta</h4>
+      {%with messages=get_flashed_messages() %}
+      {%if messages%}
+      {% for message in messages %}
+      <h2>{{message}}</h2> 
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+        
+        <input class="usuario" type="email" name="email" id="email" placeholder="Ingrese su usuario"><br>
         <input class="usuario" type="password" name="password" id="password" placeholder="Ingrese su contraseña">
         <button class="boton"  type="submit">Iniciar sesión</button>
         <p class="recuperar" ><a href="../templates/recuperar.html">Olvide mi contraseña</a></p> 
