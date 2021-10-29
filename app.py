@@ -228,5 +228,19 @@ def Salir():
     session.clear()
     return redirect(url_for('Index'))
 
+@app.route('/recuperar/', methods=['GET', 'POST'] )
+def Recuperar():
+    if request.method=='POST':
+        email=request.form['email']
+        emailcon=request.form['emailcon']
+
+        if email==emailcon:
+            flash('Se envio un enlace a tu correo:')
+            return redirect(url_for('Login'))
+        else:
+            flash('No hay coincidencia en los correos')
+    
+    return render_template('recuperar.html')
+
 if __name__=='__main__':
     app.run(port=5000,debug=True)

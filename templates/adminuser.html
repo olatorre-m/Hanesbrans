@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel='stylesheet' type='text/css' href='../static/css/adminuser.css' />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=
     , initial-scale=1.0">
@@ -10,6 +11,7 @@
 </head>
 <body>
     <form class="form-v" action="/adminuser/" method="POST">
+        <a href="/admin/" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
         <h4>Administración de usuarios</h4>
        
         {%with messages=get_flashed_messages() %}
@@ -38,7 +40,7 @@
                     
                     <td>
                         
-                        <a href="/deleteuser/{{user.0}}">Eliminar</a>
+                        <a class="uno" href="/deleteuser/{{user.0}}">Eliminar</a>
                     </td>
                 </tr> 
                 {% endfor %}

@@ -142,3 +142,16 @@ margin-left: 40px;
 text-decoration: none;
 color: #eee;
 }
+
+.form-register .btn-cerrar-popup {
+	position: relative;
+    left: 98%;
+    font-size: 16px;
+	line-height: 16px;	
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+.form-register .btn-cerrar-popup:hover {
+	color: #000;
+}

@@ -50,3 +50,22 @@ body{
 .boton:hover{
     box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.5);
 }
+
+.restore .btn-cerrar-popup {
+	position: relative;
+    left: 98%;
+    font-size: 16px;
+	line-height: 16px;	
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+.restore .btn-cerrar-popup:hover {
+	color: #000;
+}
+h2{
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: black;
+}

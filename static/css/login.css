@@ -71,3 +71,15 @@ h2{
     text-align: center;
     color: black;
 }
+form .btn-cerrar-popup {
+	position: relative;
+    left: 98%;
+    font-size: 16px;
+	line-height: 16px;	
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+form .btn-cerrar-popup:hover {
+	color: #000;
+}

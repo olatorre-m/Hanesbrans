@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link  rel="stylesheet" href="../static/css/login.css" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
@@ -13,6 +14,7 @@
     
   <form name='flogin' id='flogin' action='/login/' method='POST'>
     <div class="login">
+      <a href="/index/" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
       <h4>Mi cuenta</h4>
       {%with messages=get_flashed_messages() %}
       {%if messages%}
@@ -25,7 +27,7 @@
         <input class="usuario" type="email" name="email" id="email" placeholder="Ingrese su usuario"><br>
         <input class="usuario" type="password" name="password" id="password" placeholder="Ingrese su contraseña">
         <button class="boton"  type="submit">Iniciar sesión</button>
-        <p class="recuperar" ><a href="../templates/recuperar.html">Olvide mi contraseña</a></p> 
+        <p class="recuperar" ><a href="/recuperar/">Olvide mi contraseña</a></p> 
     </div>
   </form>
 

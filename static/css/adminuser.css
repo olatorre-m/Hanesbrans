@@ -7,6 +7,21 @@ body{
     background-color: #eee;
 }
 
+.form-v .btn-cerrar-popup {
+	position: relative;
+    left: 98%;
+    font-size: 16px;
+	line-height: 16px;	
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+.form-v .btn-cerrar-popup:hover {
+	color: #000;
+}
+
+
+
 .form-v{
     display: block;
     width: 72%;
@@ -47,7 +62,7 @@ tbody tr td{
     cursor: pointer;
 }
 
-a{
+.uno{
     background-color: #44aa44;
     width: 100px;
     border: none;
@@ -62,12 +77,12 @@ a{
     
 }
 
-a:hover{
+.uno:hover{
     box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.5);
     background-color: rgb(7, 60, 82);
     
 }
 tbody tr:hover{
     box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.5);
-    
-    }
+}
+

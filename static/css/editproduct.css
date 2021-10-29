@@ -56,3 +56,15 @@ cursor: pointer;
 font-size: 20px;
 color:black;
 }
+
+.form-v .btn-cerrar-popup {
+	font-size: 16px;
+	line-height: 16px;
+	display: block;    
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+.form-v .btn-cerrar-popup:hover {
+	color: #000;
+}
