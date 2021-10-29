@@ -47,31 +47,29 @@ def Register():
             password=request.form['pass']
             password_encode=password.encode("utf-8")
             password_encriptado=bcrypt.hashpw(password_encode,semilla)
-            # swerror=False
-            # if name==None or len(name)==0:
-            #     flash('ERROR: Debe suministrar un nombre')
-            #     swerror = True
-            # if lastname==None or len(lastname)==0:
-            #     flash('ERROR: Debe suministrar un apellido')
-            #     swerror = True
-            # if email==None or len(email)==0:
-            #     flash('ERROR: Debe suministrar un email')
-            #     swerror = True
-            # if not swerror :
-                         
-            
+            swerror=False
+            if name==None or len(name)==0:
+                flash('ERROR: Debe suministrar un nombre')
+                swerror = True
+            if lastname==None or len(lastname)==0:
+                flash('ERROR: Debe suministrar un apellido')
+                swerror = True
+            if email==None or len(email)==0:
+                flash('ERROR: Debe suministrar un email')
+                swerror = True
+            if not swerror :
+                            
+                cur=db.cursor()
+                cur.execute('INSERT INTO client (name, lastname, email, pass) VALUES (%s, %s, %s, %s)',
+                (name,lastname,email,password_encriptado))
 
-            cur=db.cursor()
-            cur.execute('INSERT INTO client (name, lastname, email, pass) VALUES (%s, %s, %s, %s)',
-            (name,lastname,email,password_encriptado))
-
-            db.commit()
-            #registrar sesion
-            session['name']=name
-            session['email']=email
-            
-            return redirect(url_for('Login'))
-            
+                db.commit()
+                #registrar sesion
+                session['name']=name
+                session['email']=email
+                
+                return redirect(url_for('Login'))
+                
 
         else:
             flash('Registro exitoso !!!')
