@@ -16,10 +16,10 @@ app=Flask(__name__)
 app.secret_key="mysecretkey"
 
 db = mysql.connector.connect(
-   host="localhost",
-   user="root",
+   host="olatorrem.mysql.pythonanywhere-services.com",
+   user="olatorrem",
    passwd="crakwz503",
-   database='hanes'
+   database='olatorrem$default'
 )
 mysql=MySQL(app)
 semilla=bcrypt.gensalt()
