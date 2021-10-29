@@ -1,9 +1,14 @@
-from flask import Flask, render_template,request, redirect,url_for,flash
+import re
+from flask import Flask, render_template,request, redirect, session, sessions,url_for,flash,send_from_directory
+from flask.templating import render_template_string
 from flask.wrappers import Request
 from flask_mysqldb import MySQL
 from markupsafe import escape 
 import mysql.connector
 import hashlib
+import bcrypt
+from werkzeug.security import check_password_hash,generate_password_hash
+import os
 from db import seleccion, accion
 
 app=Flask(__name__)
@@ -17,68 +22,105 @@ db = mysql.connector.connect(
    database='hanes'
 )
 mysql=MySQL(app)
+semilla=bcrypt.gensalt()
 
 @app.route('/')
-@app.route('/index/')
+@app.route('/index')
 def Index():
     cur = db.cursor()
     cur.execute('SELECT * FROM product')
     data=cur.fetchall()
     return render_template('index.html', products=data)
-
-@app.route('/login/', methods=['GET', 'POST'])
-def Login():
-
-    '''
-    email=request.form['email']
-    encoder=str(request.form['pass']).encode()
-    formpasword=hashlib.sha256(encoder).hexdigest()
-    cur=db.cursor()
-    temp=cur.execute('SELECT FROM CLIENT (email) VALUES (%s)', email)
-    print(temp)
-
-    if formpasword==password:
-        pass
-        '''
-
-    return render_template ('login.html')
-
-@app.route('/register/',  methods=['GET','POST'])
+    # return redirect(url_for('Index',products=data))
 
 
+
+@app.route('/register/',  methods=['GET', 'POST'])
 def Register():
     
-    if request.method == 'POST':
-        name=escape(request.form['name'])
-        lastname=escape(request.form['lastname'])
-        email=escape(request.form['email'])
+        if request.method == 'POST':
+            name=request.form['name']
+            lastname=request.form['lastname']
+            email=request.form['email']
+            password=request.form['pass']
+            password_encode=password.encode("utf-8")
+            password_encriptado=bcrypt.hashpw(password_encode,semilla)
+            # swerror=False
+            # if name==None or len(name)==0:
+            #     flash('ERROR: Debe suministrar un nombre')
+            #     swerror = True
+            # if lastname==None or len(lastname)==0:
+            #     flash('ERROR: Debe suministrar un apellido')
+            #     swerror = True
+            # if email==None or len(email)==0:
+            #     flash('ERROR: Debe suministrar un email')
+            #     swerror = True
+            # if not swerror :
+                         
+            
 
-        swerror=False
-        if name==None or len(name)==0:
-            flash('ERROR: Debe suministrar un nombre')
-            swerror = True
-        if lastname==None or len(lastname)==0:
-            flash('ERROR: Debe suministrar un apellido')
-            swerror = True
-        if email==None or len(email)==0:
-            flash('ERROR: Debe suministrar un email')
-            swerror = True
-        if not swerror :
-            
-            encoder=str(escape(request.form['pass'])).encode()
-            pasword=hashlib.sha256(encoder).hexdigest()
-            
             cur=db.cursor()
             cur.execute('INSERT INTO client (name, lastname, email, pass) VALUES (%s, %s, %s, %s)',
-            (name,lastname,email,pasword))
+            (name,lastname,email,password_encriptado))
 
             db.commit()
+            #registrar sesion
+            session['name']=name
+            session['email']=email
+            
+            return redirect(url_for('Login'))
+            
 
         else:
             flash('INFO: Los datos no fueron almacenados')
 
-    return render_template ('registro.html')
+        return render_template('registro.html')
     
+@app.route('/login/', methods=['GET', 'POST'])
+def Login():
+    if request.method == 'GET':
+        if 'nombre' in session:
+            return render_template ('index.thml')
+        else:
+            return render_template ('login.html')
+    else:           
+        email=request.form.get['email']
+        password=request.form['password']
+        password_encode=password.encode("utf-8")
+            
+        cur=db.cursor()
+        cur.execute('SELECT name, email, pass FROM client WHERE email = %s',
+        (email))
+
+        usuario=cur.fetchall()
+
+        if usuario !=None:
+            password_encriptado_encode=usuario[4].encode()
+
+                #verificar password 
+            if (bcrypt.checkpw(password_encode,password_encriptado_encode)):
+
+                    #registrar sesion
+                session['name']=usuario[1]
+                session['email']=email
+
+                return redirect(url_for('Index'))
+            else:
+
+                flash('La contraseña es incorrecta')
+                return render_template ('login.html')
+        else:
+
+            flash('El correo no existe')
+            return render_template('login.html')
+
+
+
+
+
+    
+
+
 
 @app.route('/admin/', methods=['GET', 'POST'])
 def Admin():
@@ -164,6 +206,16 @@ def delete_user(id):
     db.commit()
     flash('Usuario eliminado correctamente')
     return redirect(url_for('Admin_user'))
+
+@app.route('/comentario/',methods=['GET', 'POST'])
+def Comentario():
+     
+    
+ return render_template('descripcion.html')
+
+
+
+
 
 
 if __name__=='__main__':
